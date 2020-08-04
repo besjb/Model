@@ -13,7 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 
 
-public class Main extends Application {
+public class Interface extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -37,7 +37,7 @@ public class Main extends Application {
 		}
 	}
 	
-	public static void main(String[] args) {
+	public static void lancer(String[] args) {
 		launch(args);
 	}
 }

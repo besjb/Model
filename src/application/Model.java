@@ -6,18 +6,17 @@ import java.lang.reflect.Field;
 import java.time.LocalDate;
 
 public class Model{
+	@StaticAttribut
 	private static PropertyDescriptor[] propDescriptors;
 	
-	private String text;
+	private String text = "";
 	private int number;
 	private boolean bool;
-	private LocalDate date;
+	private LocalDate date = LocalDate.now();
+	private char character;
+	private double doubleNumber;
 	
 	public Model(){
-		text = "";
-		number = 0;
-		bool = false;
-		date = LocalDate.now();
 	}
 	
 	public String getText() {
@@ -56,6 +55,24 @@ public class Model{
 		date = newDate;
 	}
 	
+	public char getCharacter() {
+		return character;
+	}
+	
+	public void setCharacter(char character) {
+		System.out.println("Modification date : " + character);
+		this.character = character;
+	}
+	
+	public double getDoubleNumber() {
+		return doubleNumber;
+	}
+	
+	public void setDoubleNumber(double floatNumber) {
+		System.out.println("Modification date : " + floatNumber);
+		this.doubleNumber = floatNumber;
+	}
+	
 	public String toString() {
     	return text + " " + date;
     }
@@ -66,9 +83,9 @@ public class Model{
             propDescriptors = new PropertyDescriptor[Model.class.getDeclaredFields().length-1]; // -1 to not count PropertyDescriptor argument
             try {
             	for(Field f : Model.class.getDeclaredFields()) {
-            		if(!f.equals(Model.class.getDeclaredFields()[0])) {
-            			propDescriptors[i] = new PropertyDescriptor(f.toString().substring(f.toString().lastIndexOf(".")+1), Model.class);
-                        propDescriptors[i].setDisplayName(f.toString().substring(f.toString().lastIndexOf(".")+1));
+            		if(!f.isAnnotationPresent(StaticAttribut.class)) {
+            			propDescriptors[i] = new PropertyDescriptor(f.getName(), Model.class);
+                        propDescriptors[i].setDisplayName(f.getName());
                         i++;
                 	}
             	}
