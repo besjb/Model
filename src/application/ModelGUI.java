@@ -13,7 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 
 
-public class Interface extends Application {
+public class ModelGUI extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		try {
@@ -35,9 +35,5 @@ public class Interface extends Application {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-	}
-	
-	public static void lancer(String[] args) {
-		launch(args);
 	}
 }
