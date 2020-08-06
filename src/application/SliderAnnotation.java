@@ -7,5 +7,7 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface StaticAttribut {
+public @interface SliderAnnotation {
+	public double borneInf();
+	public double borneSup();
 }

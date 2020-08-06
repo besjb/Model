@@ -6,15 +6,17 @@ import java.lang.reflect.Field;
 import java.time.LocalDate;
 
 public class Model{
-	@StaticAttribut
-	private static PropertyDescriptor[] propDescriptors;
+	@PropertyDescriptorAnnotation
+	private PropertyDescriptor[] propDescriptors;
 	
 	private String text = "";
 	private int number;
 	private boolean bool;
 	private LocalDate date = LocalDate.now();
-	private char character;
 	private double doubleNumber;
+	
+	@SliderAnnotation(borneInf = 0, borneSup = 100)
+	private double slider;
 	
 	public Model(){
 	}
@@ -55,21 +57,12 @@ public class Model{
 		date = newDate;
 	}
 	
-	public char getCharacter() {
-		return character;
-	}
-	
-	public void setCharacter(char character) {
-		System.out.println("Modification date : " + character);
-		this.character = character;
-	}
-	
 	public double getDoubleNumber() {
 		return doubleNumber;
 	}
 	
 	public void setDoubleNumber(double floatNumber) {
-		System.out.println("Modification date : " + floatNumber);
+		System.out.println("Modification double : " + floatNumber);
 		this.doubleNumber = floatNumber;
 	}
 	
@@ -77,13 +70,27 @@ public class Model{
     	return text + " " + date;
     }
 	
+	public double getSlider() {
+		return slider;
+	}
+	
+	public void setSlider(double doubleSlider) {
+		System.out.println("Modification slider : " + doubleSlider);
+		this.slider = doubleSlider;
+	}
+	
 	public PropertyDescriptor[] getPropertyDescriptors() {
-		int i = 0;
+		int i = 0, cpt = 0;
         if (propDescriptors == null) {
-            propDescriptors = new PropertyDescriptor[Model.class.getDeclaredFields().length-1]; // -1 to not count PropertyDescriptor argument
+        	for(Field f : Model.class.getDeclaredFields()) {
+        		if(!f.isAnnotationPresent(PropertyDescriptorAnnotation.class)) {
+                    cpt++;
+            	}
+        	}
+            propDescriptors = new PropertyDescriptor[cpt];
             try {
             	for(Field f : Model.class.getDeclaredFields()) {
-            		if(!f.isAnnotationPresent(StaticAttribut.class)) {
+            		if(!f.isAnnotationPresent(PropertyDescriptorAnnotation.class)) {
             			propDescriptors[i] = new PropertyDescriptor(f.getName(), Model.class);
                         propDescriptors[i].setDisplayName(f.getName());
                         i++;
