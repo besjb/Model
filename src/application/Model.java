@@ -15,9 +15,6 @@ public class Model{
 	private LocalDate date = LocalDate.now();
 	private double doubleNumber;
 	
-	@SliderAnnotation(borneInf = 0, borneSup = 100)
-	private double slider;
-	
 	public Model(){
 	}
 	
@@ -69,15 +66,6 @@ public class Model{
 	public String toString() {
     	return text + " " + date;
     }
-	
-	public double getSlider() {
-		return slider;
-	}
-	
-	public void setSlider(double doubleSlider) {
-		System.out.println("Modification slider : " + doubleSlider);
-		this.slider = doubleSlider;
-	}
 	
 	public PropertyDescriptor[] getPropertyDescriptors() {
 		int i = 0, cpt = 0;
