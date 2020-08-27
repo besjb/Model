@@ -216,7 +216,7 @@ public class ElaPalmModel {
         		if(!f.isAnnotationPresent(PropertyDescriptorAnnotation.class)) {
         			try {
         				PropertyDescriptor propDescriptor = new PropertyDescriptor(f.getName(), ElaPalmModel.class);
-        				propDescriptor.setDisplayName(f.getName());
+        				propDescriptor.setDisplayName(f.getAnnotation(Parameter.class).displayName());
         				tabPropertyItem[i] = new CustomPropertyItem(this, propDescriptor);
         				tabPropertyItem[i].setCategory(f.getAnnotation(Parameter.class).category());
 	                    i++;
